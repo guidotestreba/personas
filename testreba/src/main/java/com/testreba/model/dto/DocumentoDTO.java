@@ -1,28 +1,11 @@
-package com.testreba.model;
+package com.testreba.model.dto;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "documentos")
-public class Documento {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_documento")
+public class DocumentoDTO {
     private Integer idDocumento;
-
-    @Column(name = "nro_documento")
     private String nroDocumento;
+    private TipoDocumentoDTO tipoDocumento;
 
-    @ManyToOne
-    @JoinColumn(name = "id_tipo_documento")
-    private TipoDocumento tipoDocumento;
-
-    public Documento(){
-
-    }
-
-    public Documento(Integer idDocumento, String nroDocumento, TipoDocumento tipoDocumento) {
+    public DocumentoDTO(Integer idDocumento, String nroDocumento, TipoDocumentoDTO tipoDocumento) {
         this.idDocumento = idDocumento;
         this.nroDocumento = nroDocumento;
         this.tipoDocumento = tipoDocumento;
@@ -44,11 +27,11 @@ public class Documento {
         this.nroDocumento = nroDocumento;
     }
 
-    public TipoDocumento getTipoDocumento() {
+    public TipoDocumentoDTO getTipoDocumento() {
         return tipoDocumento;
     }
 
-    public void setTipoDocumento(TipoDocumento tipoDocumento) {
+    public void setTipoDocumento(TipoDocumentoDTO tipoDocumento) {
         this.tipoDocumento = tipoDocumento;
     }
 }
