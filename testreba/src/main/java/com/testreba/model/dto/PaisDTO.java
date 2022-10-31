@@ -1,25 +1,12 @@
-package com.testreba.model;
+package com.testreba.model.dto;
 
-import javax.persistence.*;
+import com.testreba.model.PaisEnum;
 
-@Entity
-@Table(name = "paises")
-public class Pais {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_pais")
+public class PaisDTO {
     private Integer idPais;
-
-    @Column(name = "pais")
-    @Enumerated(EnumType.STRING)
     private PaisEnum pais;
 
-    public Pais(){
-
-    }
-
-    public Pais(Integer idPais, PaisEnum pais) {
+    public PaisDTO(Integer idPais, PaisEnum pais) {
         this.idPais = idPais;
         this.pais = pais;
     }

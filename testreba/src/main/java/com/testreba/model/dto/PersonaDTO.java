@@ -1,42 +1,21 @@
-package com.testreba.model;
+package com.testreba.model.dto;
 
-import javax.persistence.*;
 import java.sql.Date;
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "personas")
-public class Persona {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_persona")
+public class PersonaDTO {
     private Integer idPersona;
 
-    @ManyToOne
-    @JoinColumn(name = "id_pais")
-    private Pais pais;
-
-    @ManyToOne
-    @JoinColumn(name = "id_documento")
-    private Documento documento;
-
     private String nombre;
-
     private String apellido;
-
     private String email;
-
     private String celular;
+    private PaisDTO pais;
+    private DocumentoDTO documento;
 
-    @Column(name = "fecha_nacimiento")
     private LocalDate fechaNacimiento;
 
-    public Persona(){
-
-    }
-
-    public Persona(Integer idPersona, Pais pais, Documento documento, String nombre, String apellido, String email, String celular, LocalDate fechaNacimiento) {
+    public PersonaDTO(Integer idPersona, PaisDTO pais, DocumentoDTO documento, String nombre, String apellido, String email, String celular, LocalDate fechaNacimiento) {
         this.idPersona = idPersona;
         this.pais = pais;
         this.documento = documento;
@@ -53,22 +32,6 @@ public class Persona {
 
     public void setIdPersona(Integer idPersona) {
         this.idPersona = idPersona;
-    }
-
-    public Pais getPais() {
-        return pais;
-    }
-
-    public void setPais(Pais pais) {
-        this.pais = pais;
-    }
-
-    public Documento getDocumento() {
-        return documento;
-    }
-
-    public void setDocumento(Documento documento) {
-        this.documento = documento;
     }
 
     public String getNombre() {
@@ -101,6 +64,22 @@ public class Persona {
 
     public void setCelular(String celular) {
         this.celular = celular;
+    }
+
+    public PaisDTO getPais() {
+        return pais;
+    }
+
+    public void setPais(PaisDTO pais) {
+        this.pais = pais;
+    }
+
+    public DocumentoDTO getDocumento() {
+        return documento;
+    }
+
+    public void setDocumento(DocumentoDTO documento) {
+        this.documento = documento;
     }
 
     public LocalDate getFechaNacimiento() {

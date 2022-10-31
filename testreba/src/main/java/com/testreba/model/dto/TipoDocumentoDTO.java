@@ -1,24 +1,12 @@
-package com.testreba.model;
+package com.testreba.model.dto;
 
-import javax.persistence.*;
+import com.testreba.model.TipoDocumentoEnum;
 
-@Entity
-@Table(name = "tipos_documentos")
-public class TipoDocumento {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_tipo_documento")
+public class TipoDocumentoDTO {
     private Integer idTipoDocumento;
-
-    @Column(name = "tipo_documento")
-    @Enumerated(EnumType.STRING)
     private TipoDocumentoEnum tipoDocumento;
 
-    public TipoDocumento(){
-
-    }
-
-    public TipoDocumento(Integer idTipoDocumento, TipoDocumentoEnum tipoDocumento) {
+    public TipoDocumentoDTO(Integer idTipoDocumento, TipoDocumentoEnum tipoDocumento) {
         this.idTipoDocumento = idTipoDocumento;
         this.tipoDocumento = tipoDocumento;
     }
