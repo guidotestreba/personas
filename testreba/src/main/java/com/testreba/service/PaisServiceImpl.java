@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class PaisServiceImpl implements PaisService {
 
-    private static final String PAIS_NOT_FOUND = "País no encontrado";
 
     @Autowired
     private PaisRepository repository;
@@ -20,7 +19,7 @@ public class PaisServiceImpl implements PaisService {
 
     @Override
     public PaisDTO obtenerPais(Integer id) {
-        Pais pais = repository.findById(id).orElseThrow(() -> new PaisNotFoundException(PAIS_NOT_FOUND));
+        Pais pais = repository.findById(id).orElseThrow(() -> new PaisNotFoundException());
         return Mappers.getMapper(PaisMapper.class).paisToPaisDTO(pais);
     }
 }

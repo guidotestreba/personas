@@ -2,7 +2,10 @@ package com.testreba.controller;
 
 import com.testreba.exception.*;
 import com.testreba.model.dto.PersonaDTO;
+import com.testreba.model.dto.RelacionDTO;
 import com.testreba.service.PersonaService;
+import com.testreba.service.RelacionService;
+import com.testreba.service.RelacionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,13 +19,16 @@ public class PersonaController {
     @Autowired
     private PersonaService personaService;
 
+    @Autowired
+    private RelacionService relacionService;
+
     @GetMapping("/personas")
     public ResponseEntity obtenerPersonas() {
         try {
             List<PersonaDTO> personas = personaService.obtenerPersonas();
             return ResponseEntity.status(HttpStatus.OK).body(personas);
         } catch (Throwable e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
 
@@ -34,7 +40,7 @@ public class PersonaController {
         } catch (PersonaNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         } catch (Throwable e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
 
@@ -51,7 +57,21 @@ public class PersonaController {
         } catch (PersonaContactException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         } catch (Throwable e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
+    @PostMapping("/personas/{idPersona}/padre/{idPadre}")
+    public ResponseEntity guardarPadre(@PathVariable("idPersona") Integer idPersona,
+                                       @PathVariable ("idPadre") Integer idPadre,
+                                       @RequestBody RelacionDTO relacion) {
+        try {
+            RelacionDTO relacionDTO = relacionService.guardarPadre(idPersona,idPadre,relacion);
+            return new ResponseEntity<>(relacionDTO, HttpStatus.CREATED);
+        } catch (RelacionNotAllowedException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        } catch (Throwable e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
 
@@ -63,7 +83,7 @@ public class PersonaController {
         } catch (PersonaNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         } catch (Throwable e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
 
@@ -75,7 +95,7 @@ public class PersonaController {
         } catch (PersonaNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         } catch (Throwable e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
 }
