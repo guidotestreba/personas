@@ -16,4 +16,5 @@ public interface PersonaService {
     PersonaDTO actualizarPersona(Integer idPersona, PersonaDTO personaDTO);
 
     void borrarPersona(Integer idPersona);
+
 }
