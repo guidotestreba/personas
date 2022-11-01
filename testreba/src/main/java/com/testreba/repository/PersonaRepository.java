@@ -1,5 +1,6 @@
 package com.testreba.repository;
 
+import com.testreba.model.PaisEnum;
 import com.testreba.model.Persona;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public interface PersonaRepository extends JpaRepository<Persona, Integer> {
@@ -38,4 +40,12 @@ public interface PersonaRepository extends JpaRepository<Persona, Integer> {
     @Query(value = "delete from personas where id_persona = ?1", nativeQuery = true)
     Integer borrarPersona(Integer idPersona);
 
+    @Query(value = "select pa.pais, concat(round((((select count(*) from personas pe where pe.id_pais = pa.id_pais) * 100) / (select count(*) from personas)),2),' %') as porcentaje  from personas p inner join paises pa on pa.id_pais = p.id_pais group by pa.pais", nativeQuery = true)
+    List<Stat> obtenerStat();
+
+    interface Stat {
+        PaisEnum getPais();
+
+        String getPorcentaje();
+    }
 }

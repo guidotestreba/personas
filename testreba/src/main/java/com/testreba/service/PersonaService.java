@@ -1,9 +1,11 @@
 package com.testreba.service;
 
-import com.testreba.model.Persona;
+import com.testreba.model.PaisEnum;
 import com.testreba.model.dto.PersonaDTO;
+import com.testreba.repository.PersonaRepository;
 
 import java.util.List;
+import java.util.Map;
 
 public interface PersonaService {
     List<PersonaDTO> obtenerPersonas();
@@ -16,5 +18,7 @@ public interface PersonaService {
     PersonaDTO actualizarPersona(Integer idPersona, PersonaDTO personaDTO);
 
     void borrarPersona(Integer idPersona);
+
+    List<PersonaRepository.Stat> obtenerStat();
 
 }

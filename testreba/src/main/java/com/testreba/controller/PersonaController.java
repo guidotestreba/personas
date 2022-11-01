@@ -5,7 +5,6 @@ import com.testreba.model.dto.PersonaDTO;
 import com.testreba.model.dto.RelacionDTO;
 import com.testreba.service.PersonaService;
 import com.testreba.service.RelacionService;
-import com.testreba.service.RelacionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,6 +43,15 @@ public class PersonaController {
         }
     }
 
+    @GetMapping("/stats")
+    public ResponseEntity obtenerStats() {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(personaService.obtenerStat());
+        } catch (Throwable e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
     @PostMapping("/personas")
     public ResponseEntity guardarPersona(@RequestBody PersonaDTO personaDTO) {
         try {
@@ -63,10 +71,10 @@ public class PersonaController {
 
     @PostMapping("/personas/{idPersona}/padre/{idPadre}")
     public ResponseEntity guardarPadre(@PathVariable("idPersona") Integer idPersona,
-                                       @PathVariable ("idPadre") Integer idPadre,
+                                       @PathVariable("idPadre") Integer idPadre,
                                        @RequestBody RelacionDTO relacion) {
         try {
-            RelacionDTO relacionDTO = relacionService.guardarPadre(idPersona,idPadre,relacion);
+            RelacionDTO relacionDTO = relacionService.guardarPadre(idPersona, idPadre, relacion);
             return new ResponseEntity<>(relacionDTO, HttpStatus.CREATED);
         } catch (RelacionNotAllowedException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());

@@ -4,10 +4,7 @@ import com.testreba.exception.PersonaContactException;
 import com.testreba.exception.PersonaDuplicateException;
 import com.testreba.exception.PersonaEdadLessThanEightteenException;
 import com.testreba.exception.PersonaNotFoundException;
-import com.testreba.model.CamposPersonaEnum;
-import com.testreba.model.Documento;
-import com.testreba.model.Pais;
-import com.testreba.model.Persona;
+import com.testreba.model.*;
 import com.testreba.model.dto.DocumentoDTO;
 import com.testreba.model.dto.PaisDTO;
 import com.testreba.model.dto.PersonaDTO;
@@ -20,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class PersonaServiceImpl implements PersonaService {
@@ -134,5 +132,10 @@ public class PersonaServiceImpl implements PersonaService {
             throw new PersonaNotFoundException();
 
         repository.borrarPersona(idPersona);
+    }
+
+    @Override
+    public List<PersonaRepository.Stat> obtenerStat() {
+        return repository.obtenerStat();
     }
 }
