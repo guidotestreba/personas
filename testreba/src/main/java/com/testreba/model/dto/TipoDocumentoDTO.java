@@ -6,6 +6,10 @@ public class TipoDocumentoDTO {
     private Integer idTipoDocumento;
     private TipoDocumentoEnum tipoDocumento;
 
+    public TipoDocumentoDTO(){
+
+    }
+
     public TipoDocumentoDTO(Integer idTipoDocumento, TipoDocumentoEnum tipoDocumento) {
         this.idTipoDocumento = idTipoDocumento;
         this.tipoDocumento = tipoDocumento;

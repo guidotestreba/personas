@@ -15,6 +15,10 @@ public class PersonaDTO {
 
     private LocalDate fechaNacimiento;
 
+    public PersonaDTO(){
+
+    }
+
     public PersonaDTO(Integer idPersona, PaisDTO pais, DocumentoDTO documento, String nombre, String apellido, String email, String celular, LocalDate fechaNacimiento) {
         this.idPersona = idPersona;
         this.pais = pais;

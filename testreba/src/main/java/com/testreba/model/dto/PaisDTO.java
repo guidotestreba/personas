@@ -6,6 +6,10 @@ public class PaisDTO {
     private Integer idPais;
     private PaisEnum pais;
 
+    public PaisDTO(){
+
+    }
+
     public PaisDTO(Integer idPais, PaisEnum pais) {
         this.idPais = idPais;
         this.pais = pais;
